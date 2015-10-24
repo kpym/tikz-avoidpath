@@ -1,0 +1,13 @@
+\documentclass[border=7mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{avoidpath}
+
+\begin{document}
+  \begin{tikzpicture}
+    \path (1,0) coordinate (P) node{.} node[below,scale=.35]{P};
+    \draw[thick,red,-stealth] (0,0) to[avoid={pole=(P),radius=2mm,right}] (2,0);
+    \node[blue,above,scale=.5,font=\tt] at (P) {to[avoid=\{pole=(P),radius=2mm,right\}]};
+  \end{tikzpicture}
+\end{document}
+
+
