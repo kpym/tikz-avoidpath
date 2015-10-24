@@ -1,10 +1,10 @@
-#tikz-avoidpath
+# tikz-avoidpath
 This is a TikZ library named *avoidpath* that could be useful to draw contours of complex integrals avoiding poles.  
 
 ## Examples
 
 * Example 1 
-```
+```latex
 \documentclass[border=7mm]{standalone}
 \usepackage{tikz}
 \usetikzlibrary{avoidpath}
@@ -19,4 +19,4 @@ This is a TikZ library named *avoidpath* that could be useful to draw contours o
   \end{tikzpicture}
 \end{document}
 ```
-(https://raw.githubusercontent.com/kpym/tikz-avoidpath/examples/example1.png)
+![example 1](https://raw.githubusercontent.com/kpym/tikz-avoidpath/master/examples/avoidpath-example1.png)
