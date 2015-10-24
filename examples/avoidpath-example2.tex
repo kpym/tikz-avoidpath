@@ -1,0 +1,20 @@
+\documentclass[border=7mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{avoidpath}
+
+\begin{document}
+  \begin{tikzpicture}[thick]
+    \draw[help lines] (-.5,-.5) grid +(4,4);
+    \draw[preaction={pattern=north west lines, pattern color=gray},
+          with arrows at positions={18mm,55mm,95mm,1}]
+      (0,0)
+        to[avoid={pole={(1,0)},radius=2mm}]
+      (1.5,0)
+        to[avoid={pole={(2,0)},radius=2mm}]
+      (2.9,0)
+        arc(0:90:2.9) -- cycle
+      (1,1) circle[reversed with radius=5mm];
+  \end{tikzpicture}
+\end{document}
+
+
