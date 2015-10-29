@@ -55,10 +55,17 @@
   /handlers/.pgfmathsync to/.code 2 args=\pgfkeysalso{\pgfkeyscurrentpath/.append code=\pgfmathparse{#2}\edef\result{\pgfmathresult}\ifpgfmathunitsdeclared\providecommand#1{\result pt}\else\providecommand#1{\result cm}\fi}
 }
 
-% precision : pgfmathparse is not very precise we consides 0 <=> < \pgfeps
-%  in particular two point are considered identical if the distance is < \pgfeps
+% precision : pgfmathparse is not very precise we consides 0 <=> < \avoidpointprecision
+%  in particular two point are considered identical if the distance is < \avoidpointprecision
+%  for the same reason \avoidonaxeprecision is used to check if the pole is on the line (\tikztostart)--(\tikztotarget)
 % -----------------------------------------------------------
-\def\pgfeps{.7}
+\tikzset{
+  /avoid/.cd,
+  point precision/.store in=\avoidpointprecision,
+  on axe precision/.store in=\avoidonaxeprecision,
+  precision/.style={point precision=#1,on axe precision=#1},
+  precision=.7pt % the initial precision
+}
 
 % main to path
 % -----------------------------------------------------------
@@ -84,7 +91,7 @@
         \p{target} = (\tikztotarget);
         \p{pole} = \avoidpole; % \avoidpole is like (A) or (1,0)
         \p{projection} = (\p{start})!(\p{pole})!(\p{target});
-        if (abs(\px{projection}-\px{pole}) + abs(\py{projection}-\py{pole})) < \pgfeps then {
+        if (abs(\px{projection}-\px{pole}) + abs(\py{projection}-\py{pole})) < \avoidonaxeprecision then {
           % if the pole is on the main axe (left and right options are valid)
           \p{first base} = (\p{projection})!\avoidradius!(\p{start});
           \a{start} = atan2(\py{start}-\py{projection},\px{start}-\px{projection});
@@ -93,13 +100,13 @@
           } else {
             \a{target} = \a{start}+180; % right
           };
-          if (abs(\px{first base}-\px{start}) + abs(\py{first base}-\py{start})) > \pgfeps then {
+          if (abs(\px{first base}-\px{start}) + abs(\py{first base}-\py{start})) > \avoidpointprecision then {
             {\insertpath{-- (\p{first base})}};
           };
           {\insertpath{arc(\a{start}:\a{target}:\avoidradius)}};
         } else {
           % if pole outside of the main axe (left and right options are useless)
-          \sameasneck = abs(veclen(\px{target}-\px{start},\py{target}-\py{start})-\avoidneck) < \pgfeps;
+          \sameasneck = abs(veclen(\px{target}-\px{start},\py{target}-\py{start})-\avoidneck) < \avoidpointprecision;
           if \sameasneck then {
             % if |\p{target}-\p{start}| ~= \avoidneck
             \p{first base} = (\p{start});
