@@ -58,4 +58,14 @@ This is a TikZ library named *avoidpath* that could be useful to draw contours o
 
 * `[with arrows=35mm]` put arrows every 35mm
 * `[with arrows at positions={35mm,70mm,140mm}]` put arrows at 35mm,70mm,140mm
-* `circle[reversed with radius=1cm]` style to draw reversed circle (helpfull to not fill inside)
+* `circle[reversed with radius=1cm]` style to draw reversed circle (helpful to not fill inside)
+
+## License
+
+This file may be distributed and/or modified
+
+  1. under the LaTeX Project Public License and/or
+  2. under the GNU Public License.
+
+Both licenses are available in the LICENSES folder.
+
